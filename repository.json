@@ -2,14 +2,14 @@
     "repoName": "XPKG",
     "repoID": "xpkg",
     "repoAliases": ["packages"],
-    "repoVersion": "1.1",
+    "repoVersion": "1.2",
     "packages": {
         "xpkg":{
             "packageName": "XPKG",
             "packageID": "xpkg",
             "packageAliases": ["packages"],
             "version": "1.0",
-            "appType": "bootscript",
+            "packageType": "bootscript",
             "installURL": "https://codelikecraze.github.io/XPKG/xpkg.json",
             "icon": {
                 "foreground": "appicons/ds/aOS.png"
