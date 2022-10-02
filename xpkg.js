@@ -39,7 +39,7 @@ var xpkg = {
         } || USERFILES.xpkg;
     },
     async save() {
-        lfsave("xpkg",this.data);
+        ufsave("xpkg",this.data);
     },
     async main() {
         for (var i in this.data.repositories) {
