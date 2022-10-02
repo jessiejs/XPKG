@@ -13,6 +13,10 @@ var xpkg = {
         }
     },
     async installPackage(name) {
+        if (!this.packages[name]) {
+            console.error("Package " + name + " not found.");
+            return;
+        }
         if (this.packages[name].dependencies) {
             for (var i in this.packages[name].dependencies) {
                 await this.installRepository(this.packages[name].dependencies[i].repository);
