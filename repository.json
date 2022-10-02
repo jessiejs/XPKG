@@ -2,7 +2,7 @@
     "repoName": "XPKG",
     "repoID": "xpkg",
     "repoAliases": ["packages"],
-    "repoVersion": "1.0",
+    "repoVersion": "1.1",
     "packages": {
         "xpkg":{
             "packageName": "XPKG",
