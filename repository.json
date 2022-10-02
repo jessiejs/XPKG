@@ -5,8 +5,9 @@
     "repoVersion": "1.0",
     "packages": {
         "xpkg":{
-            "name": "XPKG",
-            "id": "xpkg",
+            "packageName": "XPKG",
+            "packageID": "xpkg",
+            "packageAliases": ["packages"],
             "version": "1.0",
             "appType": "bootscript",
             "installURL": "https://codelikecraze.github.io/XPKG/xpkg.json",
