@@ -15,7 +15,6 @@ var xpkg = {
     async installPackage(name) {
         if (!this.packages[name]) {
             console.error("Package " + name + " not found.");
-            console.log(this.packages);
             return;
         }
         if (this.packages[name].dependencies) {
@@ -30,7 +29,7 @@ var xpkg = {
     async main() {
         var data = {
             repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
-            packages:["xkpg@test"]
+            packages:["xpkg@test"]
         } || USERFILES.xpkg;
         for (var i in data.repositories) {
             await this.installRepository(data.repositories[i]);
