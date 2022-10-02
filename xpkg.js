@@ -13,13 +13,13 @@ var xpkg = {
         }
     },
     async installPackage(name) {
-        if (packages[name].dependencies) {
-            for (var i in packages[name].dependencies) {
-                await this.installRepository(packages[name].dependencies[i].repository);
-                await this.installPackage(packages[name].dependencies[i].packageName);
+        if (this.packages[name].dependencies) {
+            for (var i in this.packages[name].dependencies) {
+                await this.installRepository(this.packages[name].dependencies[i].repository);
+                await this.installPackage(this.packages[name].dependencies[i].packageName);
             }
         }
-        var src = await (await fetch(packages[name].src)).text();
+        var src = await (await fetch(this.packages[name].src)).text();
         eval(src);
     },
     async main() {
