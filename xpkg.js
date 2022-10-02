@@ -35,3 +35,4 @@ var xpkg = {
         }
     }
 };
+xpkg.main();
