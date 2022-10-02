@@ -15,6 +15,7 @@ var xpkg = {
     async installPackage(name) {
         if (!this.packages[name]) {
             console.error("Package " + name + " not found.");
+            console.log(this.packages);
             return;
         }
         if (this.packages[name].dependencies) {
