@@ -33,13 +33,13 @@ var xpkg = {
         eval(src);
     },
     async init() {
-        this.data = {
+        this.data = JSON.parse(USERFILES.xpkg || JSON.stringify({
             repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
             packages:["xpkg@test"]
-        } || USERFILES.xpkg;
+        }));
     },
     async save() {
-        ufsave("xpkg",this.data);
+        ufsave("xpkg",JSON.stringify(this.data));
     },
     async main() {
         for (var i in this.data.repositories) {
