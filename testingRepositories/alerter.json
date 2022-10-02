@@ -1,0 +1,9 @@
+{
+    "name":"alerter",
+    "packages":{
+        "hasDependencies":{
+            "packageName":"alerter",
+            "src":"https://codelikecraze.github.io/XPKG/testingRepositories/alert.js"
+        }
+    }
+}
