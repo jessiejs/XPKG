@@ -32,17 +32,24 @@ var xpkg = {
         var src = await (await fetch(this.packages[name].src)).text();
         eval(src);
     },
-    async main() {
-        var data = {
+    async init() {
+        this.data = {
             repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
             packages:["xpkg@test"]
         } || USERFILES.xpkg;
-        for (var i in data.repositories) {
-            await this.installRepository(data.repositories[i]);
+    },
+    async save() {
+        lfsave("xpkg",this.data);
+    },
+    async main() {
+        for (var i in this.data.repositories) {
+            await this.installRepository(this.data.repositories[i]);
         }
-        for (var i in data.packages) {
-            await this.installPackage(data.packages[i]);
+        for (var i in this.data.packages) {
+            await this.installPackage(this.data.packages[i]);
         }
     }
 };
+xpkg.init();
 xpkg.main();
+xpkg.save();
