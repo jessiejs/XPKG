@@ -1,6 +1,7 @@
 var xpkg = {
     packages:{},
     repositories:[],
+    installedPackages:[],
     async installRepository(repo) {
         if (!this.repositories.includes(repo)) {
             this.repositories.push(repo);
@@ -15,6 +16,11 @@ var xpkg = {
     async installPackage(name) {
         if (!this.packages[name]) {
             console.error("Package " + name + " not found.");
+            return;
+        }
+        if (!this.installedPackages.includes(name)) {
+            this.installedPackages.push(name);
+        } else {
             return;
         }
         if (this.packages[name].dependencies) {
