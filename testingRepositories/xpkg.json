@@ -1,8 +1,7 @@
 {
     "name":"xpkg",
     "packages":{
-        "hasDependencies":{
-            "packageName":"test",
+        "test":{
             "dependencies":[
                 {
                     "repository":"https://codelikecraze.github.io/XPKG/testingRepositories/alerter.json",
