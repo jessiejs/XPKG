@@ -48,8 +48,89 @@ var xpkg = {
         for (var i in this.data.packages) {
             await this.installPackage(this.data.packages[i]);
         }
+    },
+    async createCli() {
+        apps.vars.bash.commands.push({
+            name:'x',
+            desc:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
+            usage:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
+            vars:{},
+            action(args) {
+                var primaryArg = null;
+                for (var i in args) {
+                    if (!args[i].startsWith("-")) {
+                        primaryArg = args[i];
+                    }
+                }
+                if (!args[i]) {
+                    throw "XPKGError: Primary argument not found"
+                }
+                var type = "package";
+                if (primaryArg.startsWith("http")) {
+                    type = "repository";
+                }
+                if (args.includes("-repo")) {
+                    type = "repository";
+                }
+                if (args.includes("-app")) {
+                    type = "app";
+                }
+                var install = true;
+                if (type == "package") {
+                    if (this.data.packages.includes(primaryArg)) {
+                        install = false;
+                    }
+                } else {
+                    if (this.data.repositories.includes(primaryArg)) {
+                        install = false;
+                    }
+                }
+                if (args.includes("-add")) {
+                    install = true;
+                }
+                if (args.includes("-remove")) {
+                    install = false;
+                }
+                //now after all those checks, we can finally do the meat and potatoes
+                if (type == "package") {
+                    if (install) {
+                        if (!this.packages[primaryArg]) { 
+                            throw "XPKGError: Package '" + primaryArg + "' does not exist";
+                        }
+                        if (this.data.packages.includes(primaryArg)) {
+                            throw "XPKGError: " + primaryArg + " is already installed";
+                        }
+                        this.data.packages.push(primaryArg);
+                    } else {
+                        if (!this.packages[primaryArg]) { 
+                            throw "XPKGError: Package '" + primaryArg + "' does not exist";
+                        }
+                        if (!this.data.packages.includes(primaryArg)) {
+                            throw "XPKGError: " + primaryArg + " is not installed";
+                        }
+                        this.data.packages.splice(this.data.packages.indexOf(primaryArg),-1);
+                    }
+                } else {
+                    if (install) {
+                        if (this.data.repositories.includes(primaryArg)) {
+                            throw "XPKGError: " + primaryArg + " is already added";
+                        }
+                        this.data.packages.push(primaryArg);
+                    } else {
+                        if (!this.data.repositories.includes(primaryArg)) {
+                            throw "XPKGError: " + primaryArg + " is not added";
+                        }
+                        this.data.repositories.splice(this.data.repositories.indexOf(primaryArg),-1);
+                    }
+                }
+                xpkg.main()
+            }
+        });
     }
 };
-xpkg.init();
-xpkg.main();
-xpkg.save();
+(async () => {
+    await xpkg.init();
+    await xpkg.main();
+    await xpkg.save();
+    await xpkg.createCli();
+});
