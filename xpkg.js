@@ -1,4 +1,4 @@
-var xpkg = {
+window.xpkg = {
     packages:{},
     repositories:[],
     installedPackages:[],
