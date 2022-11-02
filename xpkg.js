@@ -3,51 +3,51 @@ window.xpkg = {
     repositories:[],
     installedPackages:[],
     async installRepository(repo) {
-        if (!this.repositories.includes(repo)) {
-            this.repositories.push(repo);
+        if (!xpkg.repositories.includes(repo)) {
+            xpkg.repositories.push(repo);
         } else {
             return;
         }
         var repoContents = await (await fetch(repo)).json();
         for (var i in repoContents.packages) {
-            this.packages[repoContents.name+"@"+i] = repoContents.packages[i];
+            xpkg.packages[repoContents.name+"@"+i] = repoContents.packages[i];
         }
     },
     async installPackage(name) {
-        if (!this.packages[name]) {
+        if (!xpkg.packages[name]) {
             console.error("Package " + name + " not found.");
             return;
         }
-        if (!this.installedPackages.includes(name)) {
-            this.installedPackages.push(name);
+        if (!xpkg.installedPackages.includes(name)) {
+            xpkg.installedPackages.push(name);
         } else {
             return;
         }
-        if (this.packages[name].dependencies) {
-            for (var i in this.packages[name].dependencies) {
-                await this.installRepository(this.packages[name].dependencies[i].repository);
-                await this.installPackage(this.packages[name].dependencies[i].packageName);
+        if (xpkg.packages[name].dependencies) {
+            for (var i in xpkg.packages[name].dependencies) {
+                await xpkg.installRepository(xpkg.packages[name].dependencies[i].repository);
+                await xpkg.installPackage(xpkg.packages[name].dependencies[i].packageName);
             }
         }
-        var src = await (await fetch(this.packages[name].src)).text();
+        var src = await (await fetch(xpkg.packages[name].src)).text();
         eval(src);
     },
     async init() {
-        this.data = JSON.parse(USERFILES.xpkg || JSON.stringify({
+        xpkg.data = JSON.parse(USERFILES.xpkg || JSON.stringify({
             repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
             packages:["xpkg@test"]
         }));
-        this.data = JSON.parse(USERFILES.xpkg);
+        xpkg.data = JSON.parse(USERFILES.xpkg);
     },
     async save() {
-        ufsave("xpkg",JSON.stringify(this.data));
+        ufsave("xpkg",JSON.stringify(xpkg.data));
     },
     async main() {
-        for (var i in this.data.repositories) {
-            await this.installRepository(this.data.repositories[i]);
+        for (var i in xpkg.data.repositories) {
+            await xpkg.installRepository(xpkg.data.repositories[i]);
         }
-        for (var i in this.data.packages) {
-            await this.installPackage(this.data.packages[i]);
+        for (var i in xpkg.data.packages) {
+            await xpkg.installPackage(xpkg.data.packages[i]);
         }
     },
     async createCli() {
@@ -78,11 +78,11 @@ window.xpkg = {
                 }
                 var install = true;
                 if (type == "package") {
-                    if (this.data.packages.includes(primaryArg)) {
+                    if (xpkg.data.packages.includes(primaryArg)) {
                         install = false;
                     }
                 } else {
-                    if (this.data.repositories.includes(primaryArg)) {
+                    if (xpkg.data.repositories.includes(primaryArg)) {
                         install = false;
                     }
                 }
@@ -95,33 +95,33 @@ window.xpkg = {
                 //now after all those checks, we can finally do the meat and potatoes
                 if (type == "package") {
                     if (install) {
-                        if (!this.packages[primaryArg]) { 
+                        if (!xpkg.packages[primaryArg]) { 
                             throw "XPKGError: Package '" + primaryArg + "' does not exist";
                         }
-                        if (this.data.packages.includes(primaryArg)) {
+                        if (xpkg.data.packages.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is already installed";
                         }
-                        this.data.packages.push(primaryArg);
+                        xpkg.data.packages.push(primaryArg);
                     } else {
-                        if (!this.packages[primaryArg]) { 
+                        if (!xpkg.packages[primaryArg]) { 
                             throw "XPKGError: Package '" + primaryArg + "' does not exist";
                         }
-                        if (!this.data.packages.includes(primaryArg)) {
+                        if (!xpkg.data.packages.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is not installed";
                         }
-                        this.data.packages.splice(this.data.packages.indexOf(primaryArg),-1);
+                        xpkg.data.packages.splice(xpkg.data.packages.indexOf(primaryArg),-1);
                     }
                 } else {
                     if (install) {
-                        if (this.data.repositories.includes(primaryArg)) {
+                        if (xpkg.data.repositories.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is already added";
                         }
-                        this.data.packages.push(primaryArg);
+                        xpkg.data.packages.push(primaryArg);
                     } else {
-                        if (!this.data.repositories.includes(primaryArg)) {
+                        if (!xpkg.data.repositories.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is not added";
                         }
-                        this.data.repositories.splice(this.data.repositories.indexOf(primaryArg),-1);
+                        xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),-1);
                     }
                 }
                 xpkg.main()
