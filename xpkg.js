@@ -37,6 +37,7 @@ window.xpkg = {
             repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
             packages:["xpkg@test"]
         }));
+        this.data = JSON.parse(USERFILES.xpkg);
     },
     async save() {
         ufsave("xpkg",JSON.stringify(this.data));
