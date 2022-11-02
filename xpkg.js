@@ -50,7 +50,7 @@ window.xpkg = {
         }
     },
     async createCli() {
-        apps.vars.bash.commands.push({
+        apps.bash.vars.commands.push({
             name:'x',
             desc:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
             usage:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
