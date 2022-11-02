@@ -134,4 +134,4 @@ window.xpkg = {
     await xpkg.main();
     await xpkg.save();
     await xpkg.createCli();
-});
+})();
