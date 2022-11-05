@@ -67,22 +67,28 @@ window.xpkg = {
                     throw "XPKGError: Primary argument not found"
                 }
                 var type = "package";
+                console.log("We are an app");
                 if (primaryArg.startsWith("http")) {
                     type = "repository";
+                    console.log("We are a repository");
                 }
                 if (args.includes("-repo")) {
                     type = "repository";
+                    console.log("We are a repository");
                 }
                 if (args.includes("-app")) {
                     type = "app";
+                    console.log("We are an app");
                 }
                 var install = true;
                 if (type == "package") {
                     if (xpkg.data.packages.includes(primaryArg)) {
+                        console.log("We are uninstalling a package");
                         install = false;
                     }
                 } else {
                     if (xpkg.data.repositories.includes(primaryArg)) {
+                        console.log("We are uninstalling a repository");
                         install = false;
                     }
                 }
