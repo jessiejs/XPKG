@@ -43,7 +43,6 @@ window.xpkg = {
         ufsave("xpkg",JSON.stringify(xpkg.data));
     },
     async main() {
-        xpkg.packages = {};
         for (var i in xpkg.data.repositories) {
             await xpkg.installRepository(xpkg.data.repositories[i]);
         }
@@ -51,7 +50,7 @@ window.xpkg = {
             await xpkg.installPackage(xpkg.data.packages[i]);
         }
     },
-    async createCli() {
+    createCli() {
         apps.bash.vars.commands.push({
             name:'x',
             desc:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
@@ -102,9 +101,6 @@ window.xpkg = {
                 //now after all those checks, we can finally do the meat and potatoes
                 if (type == "package") {
                     if (install) {
-                        for (var i in xpkg.data.repositories) {
-                            await xpkg.installRepository(xpkg.data.repositories[i]);
-                        }
                         if (!xpkg.packages[primaryArg]) { 
                             throw "XPKGError: Package '" + primaryArg + "' does not exist";
                         }
