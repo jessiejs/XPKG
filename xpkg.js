@@ -122,11 +122,12 @@ window.xpkg = {
                         if (xpkg.data.repositories.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is already added";
                         }
-                        xpkg.data.packages.push(primaryArg);
+                        xpkg.data.repositories.push(primaryArg);
                     } else {
                         if (!xpkg.data.repositories.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is not added";
                         }
+                        console.log(xpkg.data.repositories.indexOf(primaryArg));
                         xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),-1);
                     }
                 }
