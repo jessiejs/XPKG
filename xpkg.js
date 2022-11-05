@@ -115,7 +115,7 @@ window.xpkg = {
                         if (!xpkg.data.packages.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is not installed";
                         }
-                        xpkg.data.packages.splice(xpkg.data.packages.indexOf(primaryArg),-1);
+                        xpkg.data.packages.splice(xpkg.data.packages.indexOf(primaryArg),1);
                     }
                 } else {
                     if (install) {
@@ -128,7 +128,7 @@ window.xpkg = {
                             throw "XPKGError: " + primaryArg + " is not added";
                         }
                         console.log(xpkg.data.repositories.indexOf(primaryArg));
-                        xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),-1);
+                        xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),1);
                     }
                 }
                 xpkg.main()
