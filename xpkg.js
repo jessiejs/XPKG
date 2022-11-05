@@ -57,7 +57,7 @@ window.xpkg = {
             desc:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
             usage:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
             vars:{},
-            action(args) {
+            async action(args) {
                 var primaryArg = null;
                 for (var i in args) {
                     if (!args[i].startsWith("-")) {
