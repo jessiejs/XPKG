@@ -15,7 +15,7 @@ window.xpkg = {
     },
     async installPackage(name) {
         if (!xpkg.packages[name]) {
-            console.error("Package " + name + " not found.");
+            throw "Package " + name + " not found.";
             return;
         }
         if (!xpkg.installedPackages.includes(name)) {
@@ -50,13 +50,13 @@ window.xpkg = {
             await xpkg.installPackage(xpkg.data.packages[i]);
         }
     },
-    createCli() {
+    async createCli() {
         apps.bash.vars.commands.push({
             name:'x',
             desc:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
             usage:'x [repository name to remove | package name to remove | repository name to add | package name to add] -repo -app -add -remove',
             vars:{},
-            async action(args) {
+            action(args) {
                 var primaryArg = null;
                 for (var i in args) {
                     if (!args[i].startsWith("-")) {
@@ -67,28 +67,28 @@ window.xpkg = {
                     throw "XPKGError: Primary argument not found"
                 }
                 var type = "package";
-                console.log("We are an app");
+                doLog("We are an app");
                 if (primaryArg.startsWith("http")) {
                     type = "repository";
-                    console.log("We are a repository");
+                    doLog("We are a repository");
                 }
                 if (args.includes("-repo")) {
                     type = "repository";
-                    console.log("We are a repository");
+                    doLog("We are a repository");
                 }
                 if (args.includes("-app")) {
                     type = "app";
-                    console.log("We are an app");
+                    doLog("We are an app");
                 }
                 var install = true;
                 if (type == "package") {
                     if (xpkg.data.packages.includes(primaryArg)) {
-                        console.log("We are uninstalling a package");
+                        doLog("We are uninstalling a package");
                         install = false;
                     }
                 } else {
                     if (xpkg.data.repositories.includes(primaryArg)) {
-                        console.log("We are uninstalling a repository");
+                        doLog("We are uninstalling a repository");
                         install = false;
                     }
                 }
@@ -127,7 +127,7 @@ window.xpkg = {
                         if (!xpkg.data.repositories.includes(primaryArg)) {
                             throw "XPKGError: " + primaryArg + " is not added";
                         }
-                        console.log(xpkg.data.repositories.indexOf(primaryArg));
+                        doLog(xpkg.data.repositories.indexOf(primaryArg));
                         xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),1);
                     }
                 }
