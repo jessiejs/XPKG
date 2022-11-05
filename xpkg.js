@@ -131,7 +131,8 @@ window.xpkg = {
                         xpkg.data.repositories.splice(xpkg.data.repositories.indexOf(primaryArg),1);
                     }
                 }
-                xpkg.main()
+                xpkg.main();
+                xpkg.save();
             }
         });
     }
