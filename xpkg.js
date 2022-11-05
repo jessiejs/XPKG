@@ -102,6 +102,9 @@ window.xpkg = {
                 //now after all those checks, we can finally do the meat and potatoes
                 if (type == "package") {
                     if (install) {
+                        for (var i in xpkg.data.repositories) {
+                            await xpkg.installRepository(xpkg.data.repositories[i]);
+                        }
                         if (!xpkg.packages[primaryArg]) { 
                             throw "XPKGError: Package '" + primaryArg + "' does not exist";
                         }
