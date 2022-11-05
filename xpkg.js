@@ -43,6 +43,7 @@ window.xpkg = {
         ufsave("xpkg",JSON.stringify(xpkg.data));
     },
     async main() {
+        xpkg.packages = {};
         for (var i in xpkg.data.repositories) {
             await xpkg.installRepository(xpkg.data.repositories[i]);
         }
