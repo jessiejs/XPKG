@@ -16,7 +16,6 @@ window.xpkg = {
     async installPackage(name) {
         if (!xpkg.packages[name]) {
             throw "Package " + name + " not found.";
-            return;
         }
         if (!xpkg.installedPackages.includes(name)) {
             xpkg.installedPackages.push(name);
