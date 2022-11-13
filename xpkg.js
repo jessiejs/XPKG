@@ -2,6 +2,7 @@ window.xpkg = {
     packages:{},
     repositories:[],
     installedPackages:[],
+    onloads:[],
     async installRepository(repo) {
         if (!xpkg.repositories.includes(repo)) {
             xpkg.repositories.push(repo);
@@ -47,6 +48,9 @@ window.xpkg = {
         }
         for (var i in xpkg.data.packages) {
             await xpkg.installPackage(xpkg.data.packages[i]);
+        }
+        for (var i in xpkg.onloads) {
+            xpkg.onloads[i]();
         }
     },
     async createCli() {
