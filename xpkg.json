@@ -3,5 +3,5 @@
     "id": "xpkg",
     "version": "1.0",
     "appType": "bootscript",
-    "scriptContent": "fetch('https://codelikecraze.github.io/XPKG/xpkg.js').then(res => res.text()).then(text => eval(text));"
+    "scriptContent": "fetch('https://jessiejs.github.io/XPKG/xpkg.js').then(res => res.text()).then(text => eval(text));"
 }
