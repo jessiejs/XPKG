@@ -4,24 +4,24 @@
         "test":{
             "dependencies":[
                 {
-                    "repository":"https://codelikecraze.github.io/XPKG/testingRepositories/alerter.json",
+                    "repository":"https://jessiejs.github.io/XPKG/testingRepositories/alerter.json",
                     "packageName":"alerter@alerter"
                 },
                 {
-                    "repository":"https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json",
+                    "repository":"https://jessiejs.github.io/XPKG/testingRepositories/xpkg.json",
                     "packageName":"xpkg@cyclical"
                 }
             ],
-            "src":"https://codelikecraze.github.io/XPKG/testingRepositories/empty.js"
+            "src":"https://jessiejs.github.io/XPKG/testingRepositories/empty.js"
         },
         "cyclical":{
             "dependencies":[
                 {
-                    "repository":"https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json",
+                    "repository":"https://jessiejs.github.io/XPKG/testingRepositories/xpkg.json",
                     "packageName":"xpkg@test"
                 }
             ],
-            "src":"https://codelikecraze.github.io/XPKG/testingRepositories/empty.js"        
+            "src":"https://jessiejs.github.io/XPKG/testingRepositories/empty.js"        
         }
     }
 }
