@@ -2,7 +2,7 @@
     "name":"alerter",
     "packages":{
         "alerter":{
-            "src":"https://codelikecraze.github.io/XPKG/testingRepositories/alert.js"
+            "src":"https://jessiejs.github.io/XPKG/testingRepositories/alert.js"
         }
     }
 }
