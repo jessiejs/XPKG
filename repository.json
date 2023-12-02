@@ -10,7 +10,7 @@
             "packageAliases": ["packages"],
             "version": "1.0",
             "packageType": "bootscript",
-            "installURL": "https://codelikecraze.github.io/XPKG/xpkg.json",
+            "installURL": "https://jessiejs.github.io/XPKG/xpkg.json",
             "icon": {
                 "foreground": "appicons/ds/aOS.png"
             },
