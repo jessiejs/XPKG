@@ -34,7 +34,7 @@ window.xpkg = {
     },
     async init() {
         xpkg.data = JSON.parse(USERFILES.xpkg || JSON.stringify({
-            repositories:["https://codelikecraze.github.io/XPKG/testingRepositories/xpkg.json"],
+            repositories:["https://jessiejs.github.io/XPKG/testingRepositories/xpkg.json"],
             packages:["xpkg@test"]
         }));
         xpkg.data = JSON.parse(USERFILES.xpkg);
